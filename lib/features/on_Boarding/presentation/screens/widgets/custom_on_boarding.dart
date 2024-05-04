@@ -9,15 +9,15 @@ import 'package:gap/gap.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CustomOnBoardingBody extends StatelessWidget {
-  CustomOnBoardingBody({super.key});
-  final PageController _controller = PageController();
+  const CustomOnBoardingBody({super.key, required this.pageController});
+  final PageController pageController;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 500.h,
       child: PageView.builder(
           physics: const BouncingScrollPhysics(),
-          controller: _controller,
+          controller: pageController,
           itemCount: onBoardingData.length,
           itemBuilder: (context, index) {
             return Column(
@@ -30,7 +30,7 @@ class CustomOnBoardingBody extends StatelessWidget {
                 ),
                 Gap(24.h),
                 SmoothPageIndicator(
-                  controller: _controller,
+                  controller: pageController,
                   count: 3,
                   effect: ExpandingDotsEffect(
                     dotColor: AppColors.grey,
