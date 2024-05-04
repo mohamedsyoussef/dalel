@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key});
-
+  const CustomButton({super.key, required this.text});
+  final String text;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -18,7 +18,7 @@ class CustomButton extends StatelessWidget {
         backgroundColor: AppColors.primaryColor,
       ),
       child: Text(
-        'Next',
+        text,
         style: CustomTextStyles.poppins500style18.copyWith(color: Colors.white),
       ),
     );

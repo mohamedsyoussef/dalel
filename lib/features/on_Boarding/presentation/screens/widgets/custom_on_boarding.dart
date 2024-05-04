@@ -1,6 +1,8 @@
 import 'package:dalel/core/utils/app_colors.dart';
 import 'package:dalel/core/utils/app_text_styles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -17,15 +19,21 @@ class CustomOnBoardingBody extends StatelessWidget {
   final PageController _controller = PageController();
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
+      height: 500.h,
       child: PageView.builder(
+          physics: const BouncingScrollPhysics(),
           controller: _controller,
           itemCount: 3,
           itemBuilder: (context, index) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                image,
+                SizedBox(
+                  height: 290.h,
+                  width: 343.w,
+                  child: image,
+                ),
                 Gap(24.h),
                 SmoothPageIndicator(
                   controller: _controller,
@@ -44,6 +52,7 @@ class CustomOnBoardingBody extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.bold),
                   maxLines: 2,
                   textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Gap(16.h),
                 Text(
@@ -51,6 +60,7 @@ class CustomOnBoardingBody extends StatelessWidget {
                   style: CustomTextStyles.poppins300style16,
                   maxLines: 2,
                   textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             );

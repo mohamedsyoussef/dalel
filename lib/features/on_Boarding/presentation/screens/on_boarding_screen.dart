@@ -1,7 +1,5 @@
 import 'package:dalel/core/utils/app_assets.dart';
-import 'package:dalel/core/utils/app_strings.dart';
-import 'package:dalel/core/utils/app_text_styles.dart';
-import 'package:dalel/core/widgets/custome_button.dart';
+import 'package:dalel/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -14,19 +12,26 @@ class OnBoardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Gap(40.h),
-            const CustomSkipButton(),
-            CustomOnBoardingBody(
-              image: Image.asset(Assets.assetsImagesOnboarding1),
-              title: 'Explore The history with\n Dalel in a smart way',
-              subTitle:
-                  'Using our app’s history libraries\n you can find many historical periods ',
-            ),
-            const CustomButton(),
-            Gap(17.h)
-          ],
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0.h),
+          child: ListView(
+            physics: const BouncingScrollPhysics(),
+            children: [
+              Gap(40.h),
+              const CustomSkipButton(),
+              CustomOnBoardingBody(
+                image: Image.asset(Assets.assetsImagesOnboarding1),
+                title: 'Explore The history with Dalel in a smart way',
+                subTitle:
+                    'Using our app’s history libraries you can find many historical periods ',
+              ),
+              Gap(88.h),
+              const CustomButton(
+                text: 'Next',
+              ),
+              Gap(17.h)
+            ],
+          ),
         ),
       ),
     );

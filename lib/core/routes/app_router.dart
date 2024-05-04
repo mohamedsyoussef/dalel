@@ -5,7 +5,7 @@ final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => OnBoardingScreen(),
+      builder: (context, state) => const OnBoardingScreen(),
     ),
   ],
 );
