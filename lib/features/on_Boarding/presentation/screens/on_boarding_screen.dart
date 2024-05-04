@@ -1,4 +1,3 @@
-import 'package:dalel/core/utils/app_assets.dart';
 import 'package:dalel/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,12 +18,7 @@ class OnBoardingScreen extends StatelessWidget {
             children: [
               Gap(40.h),
               const CustomSkipButton(),
-              CustomOnBoardingBody(
-                image: Image.asset(Assets.assetsImagesOnboarding1),
-                title: 'Explore The history with Dalel in a smart way',
-                subTitle:
-                    'Using our app’s history libraries you can find many historical periods ',
-              ),
+              CustomOnBoardingBody(),
               Gap(88.h),
               const CustomButton(
                 text: 'Next',

@@ -1,5 +1,6 @@
 import 'package:dalel/core/utils/app_colors.dart';
 import 'package:dalel/core/utils/app_text_styles.dart';
+import 'package:dalel/features/on_Boarding/data/models/on_boarding_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -8,14 +9,7 @@ import 'package:gap/gap.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CustomOnBoardingBody extends StatelessWidget {
-  final Image image;
-  final String title;
-  final String subTitle;
-  CustomOnBoardingBody(
-      {super.key,
-      required this.image,
-      required this.title,
-      required this.subTitle});
+  CustomOnBoardingBody({super.key});
   final PageController _controller = PageController();
   @override
   Widget build(BuildContext context) {
@@ -24,7 +18,7 @@ class CustomOnBoardingBody extends StatelessWidget {
       child: PageView.builder(
           physics: const BouncingScrollPhysics(),
           controller: _controller,
-          itemCount: 3,
+          itemCount: onBoardingData.length,
           itemBuilder: (context, index) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,7 +26,7 @@ class CustomOnBoardingBody extends StatelessWidget {
                 SizedBox(
                   height: 290.h,
                   width: 343.w,
-                  child: image,
+                  child: Image.asset(onBoardingData[index].imagePath),
                 ),
                 Gap(24.h),
                 SmoothPageIndicator(
@@ -47,7 +41,7 @@ class CustomOnBoardingBody extends StatelessWidget {
                 ),
                 Gap(32.h),
                 Text(
-                  title,
+                  onBoardingData[index].title,
                   style: CustomTextStyles.poppins500style24
                       .copyWith(fontWeight: FontWeight.bold),
                   maxLines: 2,
@@ -56,7 +50,7 @@ class CustomOnBoardingBody extends StatelessWidget {
                 ),
                 Gap(16.h),
                 Text(
-                  subTitle,
+                  onBoardingData[index].subTitle,
                   style: CustomTextStyles.poppins300style16,
                   maxLines: 2,
                   textAlign: TextAlign.center,
