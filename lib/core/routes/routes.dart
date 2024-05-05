@@ -1,4 +1,4 @@
 const String onBoardingScreen = '/onBoardingScreen';
 const String homeScreen = '/homeScreen';
-const String loginScreen = '/loginScreen';
+const String signInScreen = '/signInScreen';
 const String signUpScreen = '/signUpScreen';

@@ -7,9 +7,16 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-        'Sign Up Screen',
-        style: CustomTextStyles.poppins600style28,
+      child: SafeArea(
+        child: Scaffold(
+          body: Align(
+            alignment: Alignment.topCenter,
+            child: Text(
+              'Welcome !',
+              style: CustomTextStyles.poppins600style28,
+            ),
+          ),
+        ),
       ),
     );
   }
