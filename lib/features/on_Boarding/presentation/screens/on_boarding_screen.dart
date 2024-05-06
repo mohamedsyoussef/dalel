@@ -1,4 +1,6 @@
+import 'package:dalel/core/database/cache/cache_helper.dart';
 import 'package:dalel/core/functions/navigation.dart';
+import 'package:dalel/core/utils/app_strings.dart';
 import 'package:dalel/features/on_Boarding/presentation/screens/widgets/get_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,9 +29,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             physics: const BouncingScrollPhysics(),
             children: [
               Gap(40.h),
-              CustomSkipButton(
-                onTap: () => customReplacementNavigate(context, signUpScreen),
-              ),
+              CustomSkipButton(onTap: () {
+                CacheHelper()
+                    .saveData(key: AppStrings.visitedOnBoardng, value: true);
+                customReplacementNavigate(context, signUpScreen);
+              }),
               CustomOnBoardingBody(
                 pageController: _controller,
                 onPageChanged: (index) {

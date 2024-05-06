@@ -1,4 +1,6 @@
+import 'package:dalel/core/database/cache/cache_helper.dart';
 import 'package:dalel/core/routes/routes.dart';
+import 'package:dalel/core/utils/app_strings.dart';
 import 'package:dalel/core/utils/app_text_styles.dart';
 import 'package:dalel/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -21,12 +23,20 @@ class GetButtons extends StatelessWidget {
       return Column(
         children: [
           CustomButton(
-            text: 'Create Account',
-            onPressed: () => customReplacementNavigate(context, signUpScreen),
-          ),
+              text: 'Create Account',
+              onPressed: () {
+                CacheHelper()
+                    .saveData(key: AppStrings.visitedOnBoardng, value: true);
+                customReplacementNavigate(context, signUpScreen);
+              }),
           Gap(16.h),
           GestureDetector(
-            onTap: () => customReplacementNavigate(context, signInScreen),
+            onTap: () {
+              CacheHelper()
+                  .saveData(key: AppStrings.visitedOnBoardng, value: true);
+
+              customReplacementNavigate(context, signInScreen);
+            },
             child: Text(
               'Login Now',
               style: CustomTextStyles.poppins400style20,

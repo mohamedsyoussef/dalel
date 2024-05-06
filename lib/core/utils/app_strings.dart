@@ -2,6 +2,7 @@ abstract class AppStrings {
   //ToDo:All Strings
 
   static const String appName = "Dalel",
+      visitedOnBoardng = 'isVisited',
       //!On Boarding Strings
       skip = "Skip",
       next = "Next",
