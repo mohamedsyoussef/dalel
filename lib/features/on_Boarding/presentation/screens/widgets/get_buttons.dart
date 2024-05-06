@@ -23,12 +23,14 @@ class GetButtons extends StatelessWidget {
       return Column(
         children: [
           CustomButton(
-              text: 'Create Account',
-              onPressed: () {
-                CacheHelper()
-                    .saveData(key: AppStrings.visitedOnBoardng, value: true);
-                customReplacementNavigate(context, signUpScreen);
-              }),
+            text: 'Create Account',
+            onPressed: () {
+              CacheHelper()
+                  .saveData(key: AppStrings.visitedOnBoardng, value: true);
+              customReplacementNavigate(context, signUpScreen);
+
+            },
+          ),
           Gap(16.h),
           GestureDetector(
             onTap: () {
