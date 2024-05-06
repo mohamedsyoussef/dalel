@@ -9,10 +9,6 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool visitedChecker =
-        CacheHelper().getData(key: AppStrings.visitedOnBoardng);
-    Logger().i('visitedCheker $visitedChecker');
-
     return Center(
       child: SafeArea(
         child: Scaffold(
