@@ -1,8 +1,7 @@
-import 'package:dalel/core/database/cache/cache_helper.dart';
 import 'package:dalel/core/routes/routes.dart';
-import 'package:dalel/core/utils/app_strings.dart';
 import 'package:dalel/core/utils/app_text_styles.dart';
 import 'package:dalel/core/widgets/custom_button.dart';
+import 'package:dalel/features/on_Boarding/functions/on_boarding_visited.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -25,17 +24,14 @@ class GetButtons extends StatelessWidget {
           CustomButton(
             text: 'Create Account',
             onPressed: () {
-              CacheHelper()
-                  .saveData(key: AppStrings.visitedOnBoardng, value: true);
+              onBoardingVisited();
               customReplacementNavigate(context, signUpScreen);
-
             },
           ),
           Gap(16.h),
           GestureDetector(
             onTap: () {
-              CacheHelper()
-                  .saveData(key: AppStrings.visitedOnBoardng, value: true);
+              onBoardingVisited();
 
               customReplacementNavigate(context, signInScreen);
             },

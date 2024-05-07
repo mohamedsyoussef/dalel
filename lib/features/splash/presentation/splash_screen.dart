@@ -1,6 +1,7 @@
 import 'package:dalel/core/database/cache/cache_helper.dart';
 import 'package:dalel/core/functions/navigation.dart';
 import 'package:dalel/core/routes/routes.dart';
+import 'package:dalel/core/services/service_locator.dart';
 import 'package:dalel/core/utils/app_colors.dart';
 import 'package:dalel/core/utils/app_strings.dart';
 import 'package:dalel/core/utils/app_text_styles.dart';
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     //check if the user already visited on boarding screen beofre
     bool isVisited =
-        CacheHelper().getData(key: AppStrings.visitedOnBoardng) ?? false;
+        getIt<CacheHelper>().getData(key: AppStrings.visitedOnBoardng) ?? false;
     if (isVisited == true) {
       delayedNavigate(context, navigationPath: signUpScreen);
     } else {
