@@ -4,6 +4,7 @@ import 'package:dalel/features/auth/auth_cubit/cubit/auth_state.dart';
 import 'package:dalel/features/auth/presentation/widgets/custom_text_field.dart';
 import 'package:dalel/features/auth/presentation/widgets/terms_and_conditions_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -57,7 +58,9 @@ class _CustomSignUpFormState extends State<CustomSignUpForm> {
                             _passwordVisible = !_passwordVisible!;
                           });
                         },
-                        icon: const Icon(Icons.remove_red_eye)),
+                        icon: Icon(_passwordVisible!
+                            ? Icons.visibility_off
+                            : Icons.visibility)),
                     labelText: 'Password',
                     onChanged: (password) {
                       authCubit.password = password;
