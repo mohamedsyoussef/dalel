@@ -4,16 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField(
-      {super.key,
-      required this.labelText,
-      this.obScureText,
-      this.onChanged,
-      this.onFieldSubmitted});
+  const CustomTextFormField({
+    super.key,
+    required this.labelText,
+    this.obScureText,
+    this.onChanged,
+    this.onFieldSubmitted,
+    this.suffixIcon,
+  });
   final String labelText;
   final bool? obScureText;
   final Function(String)? onChanged;
   final Function(String)? onFieldSubmitted;
+  final Widget? suffixIcon;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,8 +32,9 @@ class CustomTextFormField extends StatelessWidget {
         onFieldSubmitted: onFieldSubmitted,
         obscureText: obScureText ?? false,
         decoration: InputDecoration(
+          suffixIcon: suffixIcon,
           labelText: labelText,
-          labelStyle: CustomTextStyles.poppins500style12,
+          labelStyle: CustomTextStyles.poppins500style14,
           border: _getBoarderStyle(),
           enabledBorder: _getBoarderStyle(),
           focusedBorder: _getBoarderStyle(),

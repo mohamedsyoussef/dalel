@@ -43,9 +43,9 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
     return Checkbox(
         value: isChecked,
         
-        onChanged: (onChanged) {
+        onChanged: (value) {
           setState(() {
-            isChecked = onChanged!;
+            isChecked = value!;
             BlocProvider.of<AuthCubit>(context).checkBoxValueChecker(
               newValue: isChecked,
             );

@@ -23,10 +23,10 @@ class SignUpScreen extends StatelessWidget {
                 SliverToBoxAdapter(child: Gap(40.h)),
                 const SliverToBoxAdapter(child: CustomSignUpForm()),
                 SliverToBoxAdapter(child: Gap(16.h)),
-                SliverToBoxAdapter(child: Gap(16.h)),
                 const SliverToBoxAdapter(
                     child: CustomHaveAccount(
-                        text1: 'Already have an account? ', text2: 'Sign In'))
+                        text1: 'Already have an account? ', text2: 'Sign In')),
+                SliverToBoxAdapter(child: Gap(16.h)),
               ],
             ),
           ),

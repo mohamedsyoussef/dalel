@@ -10,7 +10,7 @@ class AuthCubit extends Cubit<AuthState> {
   String? lastName;
   String? emailAddress;
   String? password;
-  bool isCheckBoxValue = false;
+  bool? isCheckBoxValue = false;
   GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
   signUpWithEmailAndPassword() async {
     try {
@@ -31,7 +31,6 @@ class AuthCubit extends Cubit<AuthState> {
         }
       }
     } catch (e) {
-      print('Error: $e');
       emit(SignUpFailureState(errorMessage: e.toString()));
     }
   }

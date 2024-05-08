@@ -8,8 +8,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-class CustomSignUpForm extends StatelessWidget {
+class CustomSignUpForm extends StatefulWidget {
   const CustomSignUpForm({super.key});
+
+  @override
+  State<CustomSignUpForm> createState() => _CustomSignUpFormState();
+}
+
+class _CustomSignUpFormState extends State<CustomSignUpForm> {
+  bool? _passwordVisible;
+  @override
+  void initState() {
+    _passwordVisible = false;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
@@ -37,6 +50,14 @@ class CustomSignUpForm extends StatelessWidget {
                       authCubit.emailAddress = emailAddress;
                     }),
                 CustomTextFormField(
+                    obScureText: !_passwordVisible!,
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _passwordVisible = !_passwordVisible!;
+                          });
+                        },
+                        icon: const Icon(Icons.remove_red_eye)),
                     labelText: 'Password',
                     onChanged: (password) {
                       authCubit.password = password;
@@ -46,8 +67,10 @@ class CustomSignUpForm extends StatelessWidget {
                 CustomButton(
                   text: 'Sign Up',
                   onPressed: () {
-                    if (authCubit.signUpFormKey.currentState!.validate()) {
-                      authCubit.signUpWithEmailAndPassword();
+                    if (authCubit.isCheckBoxValue == true) {
+                      if (authCubit.signUpFormKey.currentState!.validate()) {
+                        authCubit.signUpWithEmailAndPassword();
+                      }
                     }
                   },
                 ),
