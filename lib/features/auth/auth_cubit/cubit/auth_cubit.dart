@@ -1,21 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dalel/features/auth/auth_cubit/cubit/auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
-  late String firstName;
-  late String lastName;
-  late String emailAddress;
-  late String password;
+  String? firstName;
+  String? lastName;
+  String? emailAddress;
+  String? password;
+  bool isCheckBoxValue = false;
+  GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
   signUpWithEmailAndPassword() async {
     try {
       emit(SignUpLoadingState());
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailAddress,
-        password: password,
+
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailAddress?.trim() ?? '',
+        password: password!,
       );
       emit(SignUpSuccessState());
     } on FirebaseAuthException catch (e) {
@@ -28,7 +31,13 @@ class AuthCubit extends Cubit<AuthState> {
         }
       }
     } catch (e) {
+      print('Error: $e');
       emit(SignUpFailureState(errorMessage: e.toString()));
     }
+  }
+
+  checkBoxValueChecker({required newValue}) {
+    isCheckBoxValue = newValue;
+    emit(CheckBoxValueState());
   }
 }
