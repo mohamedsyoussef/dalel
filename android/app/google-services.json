@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:521710484977:android:1671ae83ce2e6d16981850",
+        "android_client_info": {
+          "package_name": "com.example.dalel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkYKLJYlWSGC7mF3QMnl4SWmHh0pz4taE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:521710484977:android:f4e2d4736d6defee981850",
         "android_client_info": {
           "package_name": "com.logixlabs.dalel"
