@@ -13,31 +13,34 @@ class ForgetPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Gap(64.h),
-            const CustomWelcomeWidget(
-              text: 'Forgot Password',
-            ),
-            Gap(40.h),
-            SizedBox(
-              width: 235.w,
-              height: 235.h,
-              child: Image.asset(Assets.assetsImagesForgetPassword),
-            ),
-            Gap(24.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 34.w),
-              child: Text(
-                'Enter your registered email below to receive password reset instruction',
-                textAlign: TextAlign.center,
-                style: CustomTextStyles.poppins400style12
-                    .copyWith(fontSize: 14.sp),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Gap(64.h),
+              const CustomWelcomeWidget(
+                text: 'Forgot Password',
               ),
-            ),
-            Gap(41.h),
-            const CustomForgetPasswordForm(),
-          ],
+              Gap(40.h),
+              SizedBox(
+                width: 235.w,
+                height: 235.h,
+                child: Image.asset(Assets.assetsImagesForgetPassword),
+              ),
+              Gap(24.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 34.w),
+                child: Text(
+                  'Enter your registered email below to receive password reset instruction',
+                  textAlign: TextAlign.center,
+                  style: CustomTextStyles.poppins400style12
+                      .copyWith(fontSize: 14.sp),
+                ),
+              ),
+              Gap(41.h),
+              const CustomForgetPasswordForm(),
+              Gap(17.h),
+            ],
+          ),
         ),
       ),
     );
