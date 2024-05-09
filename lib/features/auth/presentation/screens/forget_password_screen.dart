@@ -41,7 +41,7 @@ class ForgetPasswordScreen extends StatelessWidget {
               Gap(17.h),
             ],
           ),
-        ),
+        ), 
       ),
     );
   }
