@@ -1,10 +1,10 @@
 import 'package:dalel/core/functions/navigation.dart';
 import 'package:dalel/core/routes/routes.dart';
-import 'package:dalel/core/utils/app_text_styles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,17 +13,16 @@ class SignInScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              customReplacementNavigate(context, signUpScreen);
+              FirebaseAuth.instance.signOut();
+              customReplacementNavigate(context, signInScreen);
             },
             icon: const Icon(Icons.logout),
           )
         ],
       ),
-      body: Center(
-          child: Text(
-        'Sign In Screen',
-        style: CustomTextStyles.pacifico400style64,
-      )),
+      body: const Center(
+        child: Text('This is Home Screen'),
+      ),
     );
   }
 }

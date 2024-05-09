@@ -1,3 +1,5 @@
+import 'package:dalel/core/functions/navigation.dart';
+import 'package:dalel/core/routes/routes.dart';
 import 'package:dalel/core/utils/app_colors.dart';
 import 'package:dalel/core/widgets/custom_button.dart';
 import 'package:dalel/features/auth/auth_cubit/cubit/auth_cubit.dart';
@@ -21,24 +23,13 @@ class CustomSignUpForm extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is SignUpSuccessState) {
-          Fluttertoast.showToast(
-              msg: "logged in successfully",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-              backgroundColor: AppColors.primaryColor,
-              textColor: Colors.white,
-              fontSize: 14.0.sp);
+          showToast(msg: 'Sign Up Success!');
+          customReplacementNavigate(context, homeScreen);
         }
         if (state is SignUpFailureState) {
           Fluttertoast.showToast(
-              msg: state.errorMessage,
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 2,
-              backgroundColor: AppColors.primaryColor,
-              textColor: Colors.white,
-              fontSize: 14.0.sp);
+            msg: state.errorMessage,
+          );
         }
       },
       builder: (context, state) {
@@ -101,5 +92,16 @@ class CustomSignUpForm extends StatelessWidget {
         );
       },
     );
+  }
+
+  void showToast({required String msg}) {
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: AppColors.primaryColor,
+        textColor: Colors.white,
+        fontSize: 14.0.sp);
   }
 }
