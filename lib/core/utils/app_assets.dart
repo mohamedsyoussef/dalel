@@ -9,6 +9,10 @@ class Assets {
   /// assets/images/dalel_android_12.png
   static const String assetsImagesDalelAndroid12 = "assets/images/dalel_android_12.png";
 
+  /// Assets for assetsImagesForgetPassword
+  /// assets/images/ForgetPassword.png
+  static const String assetsImagesForgetPassword = "assets/images/ForgetPassword.png";
+
   /// Assets for assetsImagesOnboarding1
   /// assets/images/onboarding1.png
   static const String assetsImagesOnboarding1 = "assets/images/onboarding1.png";

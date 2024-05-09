@@ -21,7 +21,8 @@ class SignInScreen extends StatelessWidget {
             const SliverToBoxAdapter(child: WelcomeBannerWidget()),
             SliverToBoxAdapter(child: Gap(32.h)),
             const SliverToBoxAdapter(
-                child: CustomWelcomeWidget(text: 'Welcome Back!')),
+              child: CustomWelcomeWidget(text: 'Welcome Back!'),
+            ),
             SliverToBoxAdapter(child: Gap(48.h)),
             const SliverToBoxAdapter(child: CustomSignInForm()),
             SliverToBoxAdapter(child: Gap(16.h)),

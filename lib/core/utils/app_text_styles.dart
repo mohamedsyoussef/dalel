@@ -9,6 +9,13 @@ abstract class CustomTextStyles {
     color: AppColors.deepBrown,
     fontFamily: "Pacifico",
   );
+  static final pacifico600style24 = TextStyle(
+    fontSize: 24.sp,
+    fontWeight: FontWeight.w600,
+    color: AppColors.deepBrown,
+    fontFamily: "Pacifico",
+  );
+
   static final saira700style32 = TextStyle(
     fontSize: 32.sp,
     fontWeight: FontWeight.w700,
@@ -22,7 +29,8 @@ abstract class CustomTextStyles {
     color: AppColors.black,
     fontFamily: "Poppins",
   );
-    static final poppins600style12 = TextStyle(
+  
+  static final poppins600style12 = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeight.w600,
     color: AppColors.black,
