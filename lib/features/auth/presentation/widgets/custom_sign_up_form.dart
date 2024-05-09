@@ -1,84 +1,104 @@
+import 'package:dalel/core/utils/app_colors.dart';
 import 'package:dalel/core/widgets/custom_button.dart';
 import 'package:dalel/features/auth/auth_cubit/cubit/auth_cubit.dart';
 import 'package:dalel/features/auth/auth_cubit/cubit/auth_state.dart';
 import 'package:dalel/features/auth/presentation/widgets/custom_text_field.dart';
 import 'package:dalel/features/auth/presentation/widgets/terms_and_conditions_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 
-class CustomSignUpForm extends StatefulWidget {
-  const CustomSignUpForm({super.key});
-
-  @override
-  State<CustomSignUpForm> createState() => _CustomSignUpFormState();
-}
-
-class _CustomSignUpFormState extends State<CustomSignUpForm> {
-  bool? _passwordVisible;
-  @override
-  void initState() {
-    _passwordVisible = false;
-    super.initState();
-  }
+class CustomSignUpForm extends StatelessWidget {
+  const CustomSignUpForm({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
-
+    final authCubit = BlocProvider.of<AuthCubit>(context);
     return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is SignUpSuccessState) {
+          Fluttertoast.showToast(
+              msg: "logged in successfully",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: AppColors.primaryColor,
+              textColor: Colors.white,
+              fontSize: 14.0.sp);
+        }
+        if (state is SignUpFailureState) {
+          Fluttertoast.showToast(
+              msg: state.errorMessage,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 2,
+              backgroundColor: AppColors.primaryColor,
+              textColor: Colors.white,
+              fontSize: 14.0.sp);
+        }
+      },
       builder: (context, state) {
         return Form(
-            key: authCubit.signUpFormKey,
-            child: Column(
-              children: [
-                CustomTextFormField(
-                    labelText: 'First Name',
-                    onChanged: (firstName) {
-                      authCubit.firstName = firstName;
-                    }),
-                CustomTextFormField(
-                    labelText: 'Last Name',
-                    onChanged: (lastName) {
-                      authCubit.lastName = lastName;
-                    }),
-                CustomTextFormField(
-                    labelText: 'E-mail Address',
-                    onChanged: (emailAddress) {
-                      authCubit.emailAddress = emailAddress;
-                    }),
-                CustomTextFormField(
-                    obScureText: !_passwordVisible!,
-                    suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _passwordVisible = !_passwordVisible!;
-                          });
-                        },
-                        icon: Icon(_passwordVisible!
-                            ? Icons.visibility_off
-                            : Icons.visibility)),
-                    labelText: 'Password',
-                    onChanged: (password) {
-                      authCubit.password = password;
-                    }),
-                const TermsAndConditions(),
-                Gap(77.h),
-                CustomButton(
-                  text: 'Sign Up',
+          key: authCubit.signUpFormKey,
+          child: Column(
+            children: [
+              CustomTextFormField(
+                labelText: 'First Name',
+                onChanged: (firstName) {
+                  authCubit.firstName = firstName;
+                },
+              ),
+              CustomTextFormField(
+                labelText: 'Last Name',
+                onChanged: (lastName) {
+                  authCubit.lastName = lastName;
+                },
+              ),
+              CustomTextFormField(
+                labelText: 'E-mail Address',
+                onChanged: (emailAddress) {
+                  authCubit.emailAddress = emailAddress;
+                },
+              ),
+              CustomTextFormField(
+                obScureText: !authCubit.passwordVisible,
+                suffixIcon: IconButton(
                   onPressed: () {
-                    if (authCubit.isCheckBoxValue == true) {
-                      if (authCubit.signUpFormKey.currentState!.validate()) {
-                        authCubit.signUpWithEmailAndPassword();
-                      }
-                    }
+                    authCubit.togglePasswordVisibility();
                   },
+                  icon: Icon(authCubit.passwordVisible
+                      ? Icons.visibility_off
+                      : Icons.visibility),
                 ),
-              ],
-            ));
+                labelText: 'Password',
+                onChanged: (password) {
+                  authCubit.password = password;
+                },
+              ),
+              const TermsAndConditions(),
+              Gap(77.h),
+              state is SignUpLoadingState
+                  ? CircularProgressIndicator(
+                      color: AppColors.primaryColor,
+                    )
+                  : CustomButton(
+                      text: 'Sign Up',
+                      onPressed: () async {
+                        if (authCubit.isCheckBoxValue == true) {
+                          if (authCubit.signUpFormKey.currentState!
+                              .validate()) {
+                            await authCubit.signUpWithEmailAndPassword();
+                          }
+                        }
+                      },
+                    ),
+            ],
+          ),
+        );
       },
     );
   }

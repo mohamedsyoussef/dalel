@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dalel/features/auth/auth_cubit/cubit/auth_state.dart';
@@ -12,12 +11,13 @@ class AuthCubit extends Cubit<AuthState> {
   String? password;
   bool? isCheckBoxValue = false;
   GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
+  bool passwordVisible = false;
   signUpWithEmailAndPassword() async {
     try {
       emit(SignUpLoadingState());
 
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailAddress?.trim() ?? '',
+        email: emailAddress!,
         password: password!,
       );
       emit(SignUpSuccessState());
@@ -26,9 +26,8 @@ class AuthCubit extends Cubit<AuthState> {
         emit(SignUpFailureState(
             errorMessage: 'The password provided is too weak.'));
       } else if (e.code == 'email-already-in-use') {
-        if (kDebugMode) {
-          print('The account already exists for that email.');
-        }
+        emit(SignUpFailureState(
+            errorMessage: 'The account already exists for that email.'));
       }
     } catch (e) {
       emit(SignUpFailureState(errorMessage: e.toString()));
@@ -38,5 +37,10 @@ class AuthCubit extends Cubit<AuthState> {
   checkBoxValueChecker({required newValue}) {
     isCheckBoxValue = newValue;
     emit(CheckBoxValueState());
+  }
+
+  void togglePasswordVisibility() {
+    passwordVisible = !passwordVisible;
+    emit(PasswordVisibleState(passwordVisible: passwordVisible));
   }
 }

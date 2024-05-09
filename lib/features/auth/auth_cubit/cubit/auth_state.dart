@@ -13,3 +13,7 @@ final class SignUpFailureState extends AuthState {
 }
 
 final class CheckBoxValueState extends AuthState {}
+final class PasswordVisibleState extends AuthState {
+  final bool passwordVisible;
+
+  PasswordVisibleState({required this.passwordVisible});}
