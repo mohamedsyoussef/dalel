@@ -9,12 +9,26 @@ abstract class CustomTextStyles {
     color: AppColors.deepBrown,
     fontFamily: "Pacifico",
   );
+  static final saira700style32 = TextStyle(
+    fontSize: 32.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.offWhite,
+    fontFamily: "Saira_Condensed",
+  );
+
   static final poppins600style28 = TextStyle(
     fontSize: 28.sp,
     fontWeight: FontWeight.w600,
     color: AppColors.black,
     fontFamily: "Poppins",
   );
+    static final poppins600style12 = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w600,
+    color: AppColors.black,
+    fontFamily: "Poppins",
+  );
+
   static final poppins400style12 = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeight.w400,

@@ -1,5 +1,6 @@
 import 'package:dalel/core/functions/navigation.dart';
 import 'package:dalel/core/routes/routes.dart';
+import 'package:dalel/core/utils/app_text_styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +21,11 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
-      body: const Center(
-        child: Text('This is Home Screen'),
+      body: Center(
+        child: Text(
+          'This is Home Screen',
+          style: CustomTextStyles.poppins500style24,
+        ),
       ),
     );
   }

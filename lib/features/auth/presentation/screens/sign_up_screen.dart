@@ -1,3 +1,5 @@
+import 'package:dalel/core/functions/navigation.dart';
+import 'package:dalel/core/routes/routes.dart';
 import 'package:dalel/features/auth/presentation/widgets/custom_sign_up_form.dart';
 import 'package:dalel/features/auth/presentation/widgets/custom_welcome.dart';
 import 'package:dalel/features/auth/presentation/widgets/have_account_widget.dart';
@@ -23,9 +25,12 @@ class SignUpScreen extends StatelessWidget {
                 SliverToBoxAdapter(child: Gap(40.h)),
                 const SliverToBoxAdapter(child: CustomSignUpForm()),
                 SliverToBoxAdapter(child: Gap(16.h)),
-                const SliverToBoxAdapter(
+                SliverToBoxAdapter(
                     child: CustomHaveAccount(
-                        text1: 'Already have an account? ', text2: 'Sign In')),
+                        onTap: () =>
+                            customReplacementNavigate(context, signInScreen),
+                        text1: 'Already have an account? ',
+                        text2: 'Sign In')),
                 SliverToBoxAdapter(child: Gap(16.h)),
               ],
             ),

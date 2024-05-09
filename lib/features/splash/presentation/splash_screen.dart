@@ -5,6 +5,7 @@ import 'package:dalel/core/services/service_locator.dart';
 import 'package:dalel/core/utils/app_colors.dart';
 import 'package:dalel/core/utils/app_strings.dart';
 import 'package:dalel/core/utils/app_text_styles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -23,7 +24,9 @@ class _SplashScreenState extends State<SplashScreen> {
     bool isVisited =
         getIt<CacheHelper>().getData(key: AppStrings.visitedOnBoardng) ?? false;
     if (isVisited == true) {
-      delayedNavigate(context, navigationPath: signUpScreen);
+      FirebaseAuth.instance.currentUser == null
+          ? delayedNavigate(context, navigationPath: signInScreen)
+          : delayedNavigate(context, navigationPath: homeScreen);
     } else {
       delayedNavigate(context, navigationPath: onBoardingScreen);
     }
@@ -49,11 +52,11 @@ class _SplashScreenState extends State<SplashScreen> {
         ));
   }
 
-  void delayedNavigate(context, {String? navigationPath}) {
+  void delayedNavigate(context, {required String navigationPath}) {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        customReplacementNavigate(context, navigationPath!);
+        customReplacementNavigate(context, navigationPath);
       },
     );
   }
