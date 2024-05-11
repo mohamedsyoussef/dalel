@@ -26,7 +26,9 @@ class _SplashScreenState extends State<SplashScreen> {
     if (isVisited == true) {
       FirebaseAuth.instance.currentUser == null
           ? delayedNavigate(context, navigationPath: signInScreen)
-          : delayedNavigate(context, navigationPath: homeScreen);
+          : FirebaseAuth.instance.currentUser!.emailVerified == true
+              ? delayedNavigate(context, navigationPath: homeScreen)
+              : delayedNavigate(context, navigationPath: signInScreen);
     } else {
       delayedNavigate(context, navigationPath: onBoardingScreen);
     }

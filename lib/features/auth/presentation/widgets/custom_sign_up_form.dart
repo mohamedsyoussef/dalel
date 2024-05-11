@@ -24,8 +24,9 @@ class CustomSignUpForm extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is SignUpSuccessState) {
-          customShowToast(msg: 'Sign Up Success!');
-          customReplacementNavigate(context, homeScreen);
+          customShowToast(
+              msg: 'Sign Up Success! ,please verify your email first');
+          customReplacementNavigate(context, signInScreen);
         }
         if (state is SignUpFailureState) {
           Fluttertoast.showToast(

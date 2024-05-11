@@ -7,6 +7,7 @@ import 'package:dalel/core/widgets/custom_button.dart';
 import 'package:dalel/features/auth/auth_cubit/cubit/auth_cubit.dart';
 import 'package:dalel/features/auth/auth_cubit/cubit/auth_state.dart';
 import 'package:dalel/features/auth/presentation/widgets/custom_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,9 @@ class CustomSignInForm extends StatelessWidget {
       listener: (context, state) {
         if (state is SigninSuccessState) {
           customShowToast(msg: 'Welcome Back!');
-          customReplacementNavigate(context, homeScreen);
+          FirebaseAuth.instance.currentUser!.emailVerified
+              ? customReplacementNavigate(context, homeScreen)
+              : customShowToast(msg: 'Please Verify Your Email First');
         }
         if (state is SigninFailureState) {
           customShowToast(
