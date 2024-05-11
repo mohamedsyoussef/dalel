@@ -1,4 +1,5 @@
 import 'package:dalel/core/functions/navigation.dart';
+import 'package:dalel/core/functions/show_toast.dart';
 import 'package:dalel/core/routes/routes.dart';
 import 'package:dalel/core/utils/app_colors.dart';
 import 'package:dalel/core/utils/app_text_styles.dart';
@@ -9,6 +10,7 @@ import 'package:dalel/features/auth/presentation/widgets/custom_text_field.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 
 class CustomSignInForm extends StatelessWidget {
@@ -20,7 +22,17 @@ class CustomSignInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final authCubit = BlocProvider.of<AuthCubit>(context);
     return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is SigninSuccessState) {
+          showToast(msg: 'Welcome Back!');
+          customReplacementNavigate(context, homeScreen);
+        }
+        if (state is SigninFailureState) {
+          Fluttertoast.showToast(
+            msg: state.errorMessage,
+          );
+        }
+      },
       builder: (context, state) {
         return Form(
           key: authCubit.signInFormKey,
@@ -50,7 +62,7 @@ class CustomSignInForm extends StatelessWidget {
               Gap(16.h),
               const ForgetPasswrodText(),
               Gap(132.h),
-              state is SignUpLoadingState
+              state is SigninLoadingState
                   ? CircularProgressIndicator(
                       color: AppColors.primaryColor,
                     )
@@ -58,7 +70,10 @@ class CustomSignInForm extends StatelessWidget {
                       backgroundColor: AppColors.primaryColor,
                       text: 'Sign In',
                       onPressed: () async {
-                        if (authCubit.signInFormKey.currentState!.validate()) {}
+                        if (authCubit.signInFormKey.currentState!.validate()) {
+                          await BlocProvider.of<AuthCubit>(context)
+                              .signInWithEmailAndPassword();
+                        }
                       },
                     ),
             ],

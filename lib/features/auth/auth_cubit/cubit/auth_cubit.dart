@@ -37,6 +37,27 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  signInWithEmailAndPassword() async {
+    try {
+      emit(SigninLoadingState());
+
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailAddress!,
+        password: password!,
+      );
+      emit(SigninSuccessState());
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        emit(SignUpFailureState(errorMessage: 'No user found for that email.'));
+      } else if (e.code == 'wrong-password') {
+        emit(SigninFailureState(
+            errorMessage: 'Wrong password provided for that user.'));
+      }
+    } catch (e) {
+      emit(SignUpFailureState(errorMessage: e.toString()));
+    }
+  }
+
   checkBoxValueChecker({required newValue}) {
     isCheckBoxValue = newValue;
     emit(CheckBoxValueState());
