@@ -10,7 +10,6 @@ import 'package:dalel/features/auth/presentation/widgets/custom_text_field.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 
 class CustomSignInForm extends StatelessWidget {
@@ -24,11 +23,11 @@ class CustomSignInForm extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is SigninSuccessState) {
-          showToast(msg: 'Welcome Back!');
+          customShowToast(msg: 'Welcome Back!');
           customReplacementNavigate(context, homeScreen);
         }
         if (state is SigninFailureState) {
-          Fluttertoast.showToast(
+          customShowToast(
             msg: state.errorMessage,
           );
         }
