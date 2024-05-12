@@ -15,7 +15,7 @@ class AuthCubit extends Cubit<AuthState> {
   GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
   GlobalKey<FormState> forgotPasswordKey = GlobalKey<FormState>();
   bool passwordVisible = false;
-  signUpWithEmailAndPassword() async {
+  Future<void> signUpWithEmailAndPassword() async {
     try {
       emit(SignUpLoadingState());
 
@@ -43,7 +43,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  signInWithEmailAndPassword() async {
+  Future<void> signInWithEmailAndPassword() async {
     try {
       emit(SigninLoadingState());
 
@@ -68,7 +68,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  verifyEmail() async {
+  Future<void> verifyEmail() async {
     await FirebaseAuth.instance.currentUser!.sendEmailVerification();
   }
 
@@ -82,17 +82,17 @@ class AuthCubit extends Cubit<AuthState> {
     emit(PasswordVisibleState(passwordVisible: passwordVisible));
   }
 
-  resetPasswordLink() {
+  Future<void> resetPasswordLink() async {
     try {
       emit(ForgotPasswordLoadingState());
-      FirebaseAuth.instance.sendPasswordResetEmail(email: emailAddress!);
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: emailAddress!);
       emit(ForgotPasswordSuccessState());
     } on FirebaseAuthException catch (e) {
       emit(ForgetPasswordFailureState(errorMessage: e.code.toString()));
     }
   }
 
-  userProfile() async {
+  Future<void> userProfile() async {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     await users.add({
       'firstName': firstName,
