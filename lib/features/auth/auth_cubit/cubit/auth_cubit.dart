@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +23,8 @@ class AuthCubit extends Cubit<AuthState> {
         email: emailAddress!,
         password: password!,
       );
-      verifyEmail();
+      await userProfile();
+      await verifyEmail();
       emit(SignUpSuccessState());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -88,5 +90,14 @@ class AuthCubit extends Cubit<AuthState> {
     } on FirebaseAuthException catch (e) {
       emit(ForgetPasswordFailureState(errorMessage: e.code.toString()));
     }
+  }
+
+  userProfile() async {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    await users.add({
+      'firstName': firstName,
+      'lastName': lastName,
+      'emailAddress': emailAddress
+    });
   }
 }
