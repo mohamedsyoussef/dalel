@@ -29,3 +29,13 @@ final class PasswordVisibleState extends AuthState {
 
   PasswordVisibleState({required this.passwordVisible});
 }
+
+final class ForgotPasswordLoadingState extends AuthState {}
+
+final class ForgotPasswordSuccessState extends AuthState {}
+
+final class ForgetPasswordFailureState extends AuthState {
+  final String errorMessage;
+
+  ForgetPasswordFailureState({required this.errorMessage});
+}

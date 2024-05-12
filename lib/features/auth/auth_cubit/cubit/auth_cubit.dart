@@ -12,7 +12,7 @@ class AuthCubit extends Cubit<AuthState> {
   bool? isCheckBoxValue = false;
   GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
   GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
-  GlobalKey<FormState> forgetPasswordKey = GlobalKey<FormState>();
+  GlobalKey<FormState> forgotPasswordKey = GlobalKey<FormState>();
 
   bool passwordVisible = false;
   signUpWithEmailAndPassword() async {
@@ -79,5 +79,15 @@ class AuthCubit extends Cubit<AuthState> {
   void togglePasswordVisibility() {
     passwordVisible = !passwordVisible;
     emit(PasswordVisibleState(passwordVisible: passwordVisible));
+  }
+
+  resetPasswordLink() {
+    try {
+      emit(ForgotPasswordLoadingState());
+      FirebaseAuth.instance.sendPasswordResetEmail(email: emailAddress!);
+      emit(ForgotPasswordSuccessState());
+    } on FirebaseAuthException catch (e) {
+      emit(ForgetPasswordFailureState(errorMessage: e.code.toString()));
+    }
   }
 }

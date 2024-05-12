@@ -1,3 +1,6 @@
+import 'package:dalel/core/functions/navigation.dart';
+import 'package:dalel/core/functions/show_toast.dart';
+import 'package:dalel/core/routes/routes.dart';
 import 'package:dalel/core/utils/app_colors.dart';
 import 'package:dalel/core/widgets/custom_button.dart';
 import 'package:dalel/features/auth/auth_cubit/cubit/auth_cubit.dart';
@@ -17,10 +20,20 @@ class CustomForgetPasswordForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final authCubit = BlocProvider.of<AuthCubit>(context);
     return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is ForgotPasswordSuccessState) {
+          customShowToast(msg: "Rest Password Link Sent To Your Email");
+          customReplacementNavigate(context, signInScreen);
+        }
+        if (state is ForgetPasswordFailureState) {
+          customShowToast(
+            msg: state.errorMessage,
+          );
+        }
+      },
       builder: (context, state) {
         return Form(
-          key: authCubit.forgetPasswordKey,
+          key: authCubit.forgotPasswordKey,
           child: Column(
             children: [
               Padding(
@@ -33,13 +46,20 @@ class CustomForgetPasswordForm extends StatelessWidget {
                 ),
               ),
               Gap(129.h),
-              CustomButton(
-                backgroundColor: AppColors.primaryColor,
-                text: 'Send Verfication Code',
-                onPressed: () async {
-                  if (authCubit.forgetPasswordKey.currentState!.validate()) {}
-                },
-              ),
+              State is ForgotPasswordLoadingState
+                  ? CircularProgressIndicator(
+                      color: AppColors.primaryColor,
+                    )
+                  : CustomButton(
+                      backgroundColor: AppColors.primaryColor,
+                      text: 'Send Rest Password Link',
+                      onPressed: () async {
+                        if (authCubit.forgotPasswordKey.currentState!
+                            .validate()) {
+                          authCubit.resetPasswordLink();
+                        }
+                      },
+                    ),
             ],
           ),
         );
