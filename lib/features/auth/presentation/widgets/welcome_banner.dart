@@ -21,7 +21,7 @@ class WelcomeBannerWidget extends StatelessWidget {
         children: [
           Text(
             'Dalel',
-            style: CustomTextStyles.saira700style32,
+            style: CustomTextStyles.pacifico700style42,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

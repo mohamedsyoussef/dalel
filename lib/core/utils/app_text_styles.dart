@@ -22,6 +22,12 @@ abstract class CustomTextStyles {
     color: AppColors.offWhite,
     fontFamily: "Saira_Condensed",
   );
+  static final pacifico700style32 = TextStyle(
+    fontSize: 32.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.offWhite,
+    fontFamily: "Pacifico",
+  );
 
   static final poppins600style28 = TextStyle(
     fontSize: 28.sp,
@@ -29,7 +35,7 @@ abstract class CustomTextStyles {
     color: AppColors.black,
     fontFamily: "Poppins",
   );
-  
+
   static final poppins600style12 = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeight.w600,
@@ -80,7 +86,7 @@ abstract class CustomTextStyles {
     color: AppColors.deepBrown,
     fontFamily: "Poppins",
   );
-  static final pacifico700style32 = TextStyle(
+  static final pacifico700style42 = TextStyle(
     fontSize: 42.sp,
     fontWeight: FontWeight.bold,
     color: Colors.white,
