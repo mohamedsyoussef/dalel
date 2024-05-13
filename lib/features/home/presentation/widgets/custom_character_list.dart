@@ -1,20 +1,21 @@
-import 'package:dalel/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-class CustomHorizontalListView extends StatelessWidget {
-  const CustomHorizontalListView({super.key});
+import '../../../../core/utils/app_colors.dart';
+
+class CustomCharacterList extends StatelessWidget {
+  const CustomCharacterList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 96.h,
+      height: 77.h,
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: 3,
+        itemCount: 4,
         itemBuilder: (BuildContext context, int index) {
           return Container(
             decoration: BoxDecoration(
@@ -22,16 +23,17 @@ class CustomHorizontalListView extends StatelessWidget {
                 color: AppColors.offWhite,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.5), // Shadow color
-                    spreadRadius: 0.r, // Spread radius
-                    blurRadius: 5.r, // Blur radius
-                  )
+                      color:
+                          AppColors.deepGrey.withOpacity(0.5), // Shadow color
+                      spreadRadius: 0.r, // Spread radius
+                      blurRadius: 5.r,
+                      offset: const Offset(0, 7) // Blur radius
+                      )
                 ]),
             margin: EdgeInsets.only(right: 16.h),
-            width: 164.w,
-            height: 96.h,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            width: 74.w,
+            height: 133.h,
+            child: Column(
               children: [
                 const Text('Hello'),
                 Gap(24.h),
