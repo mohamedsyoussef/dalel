@@ -4,6 +4,7 @@ import 'package:dalel/features/auth/presentation/screens/forget_password_screen.
 import 'package:dalel/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:dalel/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:dalel/features/home/presentation/screens/home_screen.dart';
+import 'package:dalel/features/home/presentation/widgets/home_nave_bar.dart';
 import 'package:dalel/features/on_Boarding/presentation/screens/on_boarding_screen.dart';
 import 'package:dalel/features/splash/presentation/splash_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,18 +35,15 @@ final GoRouter appRouter = GoRouter(
       ),
     ),
     GoRoute(
-      path: homeScreen,
-      builder: (context, state) => BlocProvider(
-        create: (context) => AuthCubit(),
-        child: const HomeScreen(),
-      ),
-    ),
-    GoRoute(
       path: forgetPasswordScreen,
       builder: (context, state) => BlocProvider(
         create: (context) => AuthCubit(),
         child: const ForgetPasswordScreen(),
       ),
+    ),
+    GoRoute(
+      path: homeNavBar,
+      builder: (context, state) => HomeNavBar(),
     ),
   ],
 );
